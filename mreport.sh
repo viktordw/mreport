@@ -63,7 +63,7 @@ fn_output_coloring_on () {
 # ################################################# #
 
 conf_report_file='mreport.txt'
-
+conf_dirname='mr_data'
 
 # ################################################# #
 
@@ -87,14 +87,34 @@ fi
 skip () {
   printf ''
 }
-generate_dir () {
 
+date=$(date | awk '{ print $2 "_" $3 "_" $4 }')
+file=$(echo "report-$date")
+
+check_dir () {
+  if [ ! -f "~/mr_data" ]; then
+    mkdir ~/$conf_dirname
+  else
+    mr_dir='true'
+  fi
 }
+
+make_dir () {
+  mkdir ~/$conf_dirname/
+}
+
 # ################################################# #
+check_dir
+
+if [ "$mr_dir" = 'true' ]; then
+  skip
+else
+  skip
+fi
 
 if [ -n "$mlist" ]; then
   echo "Retrieving malware list..."
-  sudo dwh -u $user --mlist | head -5 |
+  sudo dwh -u "$user" --mlist | head -5 > file.txt
 else
   skip
 fi
