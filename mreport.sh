@@ -63,8 +63,21 @@ fn_output_coloring_on () {
 # ################################################# #
 
 conf_report_file='mreport.txt'
-conf_dirname='mr_data'
+conf_data_dirname='mr_data'
 
+usage () {
+  text=''
+  text+="Malware Report Utility - MReport\n"
+  text+="\n"
+  text+="usage: user (u), domain (d), ip, mlist, ll\n"
+  text+="    -u, --user [username]\n"
+  text+="    -d, --domain [example.com]\n"
+  text+="    --ip [suspected IP address]\n"
+  text+="    --mlist [true, false]\n"
+  text+="    --ll [true, false]\n"
+  text+="\n"
+  printf "%b" "$text"
+}
 # ################################################# #
 
 # Read arguments
@@ -89,22 +102,21 @@ skip () {
 }
 
 date=$(date | awk '{ print $2 "_" $3 "_" $4 }')
-file=$(echo "report-$date")
+report_dir=$(echo "$user-$date")
 
-check_dir () {
-  if [ ! -f "~/mr_data" ]; then
-    mkdir ~/$conf_dirname
-  else
-    mr_dir='true'
-  fi
+make_data_dir () {
+    mkdir -p ~/$conf_data_dirname
 }
 
-make_dir () {
-  mkdir ~/$conf_dirname/
+make_report_dir () {
+  mkdir -p $report_dir
 }
 
 # ################################################# #
-check_dir
+make_data_dir
+make_report_dir
+
+data_path="${conf_data_dirname}${report_dir}"
 
 if [ "$mr_dir" = 'true' ]; then
   skip
@@ -114,7 +126,7 @@ fi
 
 if [ -n "$mlist" ]; then
   echo "Retrieving malware list..."
-  sudo dwh -u "$user" --mlist | head -5 > file.txt
+  sudo dwh -u "$user" --mlist > /mlist.txt
 else
   skip
 fi
