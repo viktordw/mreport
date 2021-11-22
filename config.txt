@@ -1,0 +1,6 @@
+# ################################################# #
+# KONFIGURACIJA                                     #
+# ################################################# #
+
+conf_report_file='mreport.txt'
+conf_data_dirname='mr_data'
