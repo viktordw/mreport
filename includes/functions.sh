@@ -46,3 +46,18 @@ usage () {
   text+="\n"
   printf "%b" "$text"
 }
+
+skip () {
+  printf ''
+}
+
+date=$(date | awk '{ print $2 "_" $3 "_" $4 }')
+report_dir=$(echo "$user-$date")
+
+make_data_dir () {
+    mkdir -p ~/$conf_data_dirname
+}
+
+make_report_dir () {
+  mkdir -p $report_dir
+}

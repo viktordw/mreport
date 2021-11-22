@@ -1,14 +1,16 @@
 #!/bin/bash
 
-# ###########################
-# mreport - alpha
-# ###########################
+#############################################
+# https://github.com/viktordw/mreport       #
+# License:                                  #
+# Publish date: Nov 17, 2021.               #
+# Version: 0.1-Alpha                        #
+#############################################
 
 source libraries/args.sh
 source includes/functions.sh
 source config.txt
-
-# ################################################# #
+# ######################################### #
 
 # Read arguments
 if [ "$#" = 0 ]; then
@@ -24,25 +26,7 @@ else
   ll=$(get_value "ll" "$@")
 fi
 
-# ################################################# #
-# FUNKCIJE                                          #
-# ################################################# #
-skip () {
-  printf ''
-}
-
-date=$(date | awk '{ print $2 "_" $3 "_" $4 }')
-report_dir=$(echo "$user-$date")
-
-make_data_dir () {
-    mkdir -p ~/$conf_data_dirname
-}
-
-make_report_dir () {
-  mkdir -p $report_dir
-}
-
-# ################################################# #
+# ######################################### #
 make_data_dir
 make_report_dir
 
