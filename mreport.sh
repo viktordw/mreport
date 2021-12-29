@@ -6,10 +6,12 @@
 # Publish date: Nov 17, 2021.               #
 # Version: 0.1-Alpha                        #
 #############################################
+path=$(pwd)
 
-source libraries/args.sh
-source includes/functions.sh
-source config.txt
+source ${path}/libraries/args.sh
+source ${path}/includes/functions.sh
+source ${path}/includes/main.sh
+source ${path}/config.txt
 # ######################################### #
 
 # Read arguments
