@@ -1,4 +1,4 @@
-fn_main () {
+main () {
   if [ "$mr_dir" = 'true' ]; then
     skip
   else

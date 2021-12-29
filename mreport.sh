@@ -34,4 +34,4 @@ make_report_dir
 
 data_path="${conf_data_dirname}${report_dir}"
 
-fn_main
+main
